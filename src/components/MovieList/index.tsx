@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import './index.scss';
 import axios from 'axios';
-
+import MovieCard from '../MovieCard';
+import { Movie} from '../types';
 export interface MovieType {
   id: number,
   title: string,
@@ -16,7 +17,7 @@ export interface MovieType {
 
 function MovieList() {
 
-  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
 
   const getMovies = async () => {
@@ -50,14 +51,15 @@ function MovieList() {
         // CORREÇÃO: Usar o método map() para renderizar os filmes.
         // Adicionar uma 'key' única para cada item para evitar warnings do React.
         movies.map(movie => (
-          <li key={movie.id} className='movie-card'>
-            <h3>{movie.title}</h3>
-            <p>{movie.overview}</p>
-            <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" />
-            <p>
-              {movie.vote_average}/10
-            </p>
-          </li>
+          <MovieCard 
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            overview={movie.overview}
+            poster_path={movie.poster_path}
+            vote_average={movie.vote_average}
+          
+          />
         ))
       )}
     </ul>
