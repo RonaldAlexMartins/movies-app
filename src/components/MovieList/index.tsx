@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './index.scss';
 import axios from 'axios';
 import MovieCard from '../MovieCard';
-import { Movie} from '../types';
+import { Movie } from '../types/movie';
 export interface MovieType {
   id: number,
   title: string,
@@ -44,15 +44,15 @@ function MovieList() {
   }, []);
 
   return (
-    
+
     <ul className='movie-list'>
       {loading ? (
         <p>Carregando filmes...</p>
-      ) : (        
+      ) : (
         movies && movies.map(movie => (
-          <MovieCard 
+          <MovieCard
             key={movie.id}
-              {...movie}          
+            {...movie}
           />
         ))
       )}
