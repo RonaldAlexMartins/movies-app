@@ -1,17 +1,26 @@
 import './index.scss'
 import {Movie} from '../types'
 
-function MovieCard(props:Movie) {
-    const imageUrl = `https://image.tmdb.org/t/p/original${props.poster_path}`
-    const altImage = `Pôster do Filme ${props.title}`
+export interface Props {
+  movie: Movie
+}
+
+function MovieCard({title, poster_path, overview, vote_average}: Movie) {
+
+  
+
+    const imageUrl = `https://image.tmdb.org/t/p/original${poster_path}`
+    const altImage = `Pôster do Filme ${title}`
+    
+    
 
   return (
         <li className='movie-card'>
-            <h3>{props.title}</h3>
-            <p>{props.overview}</p>
+            <h3>{title}</h3>
+            <p>{overview}</p>
             <img src={imageUrl} alt={altImage} />
             <p>
-            {props.vote_average}
+            {vote_average}
             </p>
         </li>
   )

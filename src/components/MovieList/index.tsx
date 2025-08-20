@@ -44,21 +44,15 @@ function MovieList() {
   }, []);
 
   return (
+    
     <ul className='movie-list'>
       {loading ? (
         <p>Carregando filmes...</p>
-      ) : (
-        // CORREÇÃO: Usar o método map() para renderizar os filmes.
-        // Adicionar uma 'key' única para cada item para evitar warnings do React.
-        movies.map(movie => (
+      ) : (        
+        movies && movies.map(movie => (
           <MovieCard 
             key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            overview={movie.overview}
-            poster_path={movie.poster_path}
-            vote_average={movie.vote_average}
-          
+              {...movie}          
           />
         ))
       )}
