@@ -6,7 +6,7 @@
     overflow: hidden;
     position: relative;
 
-    .movie-poster {
+    .movie-poster img {
         width: 100%;
         height: 100%;
         border-radius: 8px;
@@ -29,16 +29,18 @@
 
         .movie-title{
             color: #f1f5f9;
-            font-size: 8px;
+            font-size: 14px;
+            font-weight: bold;
         }
 
         .hidden-content{
             color: #f1f5f9;
             font-size: 12px;
             margin-top: 8px;
-            height: 0px;
+            max-height: 0px;
             opacity: 0;
-            transition: all .6s;
+            overflow: hidden;
+            transition: all .6s ease;
 
             .btn-default {
                 background-color: #6046ff;
@@ -49,6 +51,11 @@
                 border: none;
                 cursor: pointer;
                 width: 100%;
+                transition: background-color .3s;
+
+                &:hover {
+                    background-color: #4e36cc;
+                }
             }
         }    
     }
@@ -56,19 +63,16 @@
     &:hover {
         cursor: pointer;
 
-        .movie-poster {
+        .movie-poster img {
             opacity: 0.5;
         }
 
         .hidden-content {
-            opacity: 1;            
+            opacity: 1;
+            max-height: 120px;            
         }
-
-        .movie-infos:has(.description) .hidden-content {
-            height: 100px;
-        }
-        .movie-infos:not(:has(.description)) .hidden-content{
-            height: 50px;
-        }
+        .hidden-content.with-text {
+            max-height: 180px;
+        }        
     }
 }
