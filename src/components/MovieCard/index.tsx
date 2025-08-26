@@ -9,6 +9,7 @@ function MovieCard({ title, poster_path, overview, vote_average }: Movie) {
 
   const imageUrl = `https://image.tmdb.org/t/p/original${poster_path}`
   const altImage = `Pôster do Filme ${title}`
+  const shortDescription = overview ? overview.split(' ').slice(0, 20).join(' ') + '...' : '';
 
   return (
     <li className="movie-card">
@@ -16,21 +17,13 @@ function MovieCard({ title, poster_path, overview, vote_average }: Movie) {
         <img src={imageUrl} alt={altImage} />
       </div>
       <div className="movie-infos">
-        <p className="movie-title">
-          {title}
-        </p>
-        {vote_average > 0 && 
-          <StarRating rating={vote_average} />
-        }
-        <div className="hidden-content">
-          {overview &&
-            <p className="description">
-              {overview.length > 100 ? `${overview.substring(0, 100)}...` : overview}
-            </p>          
-          }
-          <button className="btn-default">
-            Ver mais
-          </button>
+        <p className="movie-title"> {title} </p>
+
+        {vote_average > 0 && <StarRating rating={vote_average} />}
+
+        <div className={`hidden-content ${shortDescription ? 'with-text' : ''}`}>
+          {shortDescription && <p className="description">{shortDescription}</p>}
+          <button className="btn-default"> Ver mais</button>
         </div>
       </div>
     </li>
