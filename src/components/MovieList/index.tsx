@@ -21,6 +21,8 @@ function MovieList() {
   const [loading, setLoading] = useState(true);
 
   const getMovies = async () => {
+  
+    
     try {
       const response = await axios({
         method: 'get',
@@ -40,21 +42,45 @@ function MovieList() {
   };
 
   useEffect(() => {
-    getMovies();
+    const controller = new AbortController();
+
+    const fetchMovies = async () => {
+      try {
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/discover/movie',
+          {
+            params: {
+              api_key: process.env.NEXT_PUBLIC_TMDB_KEY, // ✅ Pega de env
+              language: 'pt-BR',
+            },
+            signal: controller.signal, // ✅ permite cancelamento
+          }
+        );
+
+        setMovies(response.data.results);
+      } catch (error) {
+        if (!axios.isCancel(error)) {
+          console.error('Erro ao buscar filmes:', error);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+  
+    fetchMovies();
+
+    return () => controller.abort();
   }, []);
 
-  return (
+  if (loading) return <p>Carregando filmes...</p>;
 
-    <ul className='movie-list'>
-      {loading ? (
-        <p>Carregando filmes...</p>
+  return (
+    <ul className="movie-list">
+      {movies.length > 0 ? (
+        movies.map((movie) => <MovieCard key={movie.id} {...movie} />)
       ) : (
-        movies && movies.map(movie => (
-          <MovieCard
-            key={movie.id}
-            {...movie}
-          />
-        ))
+        <p>Nenhum filme encontrado.</p>
       )}
     </ul>
   );
