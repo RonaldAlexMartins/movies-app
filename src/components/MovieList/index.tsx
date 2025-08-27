@@ -13,8 +13,6 @@ export interface MovieType {
   vote_average: number,
 }
 
-
-
 function MovieList() {
 
   const [movies, setMovies] = useState<Movie[]>([]);
