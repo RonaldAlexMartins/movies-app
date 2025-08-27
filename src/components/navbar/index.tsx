@@ -1,13 +1,23 @@
 import './index.scss';
+import Link from 'next/link';
+
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <h1 className="page-title">Movie App</h1>
+      <Link href="/" className="page-title-link">
+        <h1 className="page-title">Movie App</h1>
+      </Link>
       <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/about">Sobre</Link>
+        </li>
+        <li>
+          <Link href="/contact">Contato</Link>
+        </li>
       </ul>
     </nav>
   );

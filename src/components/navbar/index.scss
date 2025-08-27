@@ -1,8 +1,42 @@
 .navbar {
     background-color: #0f172a;
     padding: 12px 3%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    flex-direction: row;
+    align-items: center;
+
+    .page-title-link{
+        text-decoration: none;
+    }
 
     .page-title {
-        color: #fff
+        color: #fff;
+        margin: 0;
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li a {
+        color:#cbd5e1;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px;
+        border-radius: 4px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
     }
 }
+
